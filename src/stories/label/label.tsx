@@ -1,6 +1,6 @@
 import react from "react";
 
-interface LabelProps {
+export interface LabelProps {
   label : string;
   size?: 'small' | 'medium' | 'large';
 }

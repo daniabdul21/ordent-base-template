@@ -1,7 +1,4 @@
 export default function (plop) {
-  // plop.setActionType('test', function (answers, config, api) {
-  //   console.log({answers, config, api})
-  // })
   plop.setGenerator("plop-template", {
     description : 'example',
     prompts : [
@@ -9,27 +6,34 @@ export default function (plop) {
         name : 'language',
         type : 'list',
         message : "Choose Your Language? (use arrow)",
-        choices : ['php', 'react']
+        choices : ['php', 'js']
       },
       {
         name : 'type',
         type : 'list',
-        message : 'Choose type?',
+        message : 'Choose type? (use arrow)',
         choices:  ['atoms', 'molecules', 'organism', 'pages','templates']
       },
       {
         name : 'path',
         type : 'input',
-        message: 'Input preferred path'
+        message: 'Input preferred path?'
       },
       {
         name : 'component',
         type : 'input',
-        message: 'Input preferred components'
+        message: 'Input preferred components?',
+        when : (answers) => {
+          if(answers.type == 'templates'){
+            return false
+          }
+          return true;
+        }
       }
     ],
     actions : function (data){
       const actions = [];
+
       if(data.type !== 'templates'){
         actions.push({
           type : 'add',
